@@ -8,8 +8,8 @@ export class Q<T = unknown> {
     this.reset(list)
   }
 
-  /** Adds one item to the tail of the queue (enqueue). */
-  add(item: T) {
+  /** Adds an item to the tail of the queue (enqueue). */
+  insert(item: T) {
     this.list[this.tail++] = item
   }
 

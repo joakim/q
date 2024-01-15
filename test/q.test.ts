@@ -17,13 +17,13 @@ describe('add', () => {
   const q = new Q([1, 2, 3])
 
   it('should add an item to the back of the queue', () => {
-    q.add(4)
+    q.insert(4)
     expect(q.toArray()).toEqual([1, 2, 3, 4])
   })
 
   it('should accept no argument (undefined)', () => {
     // @ts-ignore
-    q.add()
+    q.insert()
     expect(q.toArray()).toEqual([1, 2, 3, 4, undefined])
   })
 })
@@ -64,9 +64,9 @@ describe('size', () => {
     q.remove()
     q.remove()
     expect(q.size()).toBe(1)
-    q.add(4)
-    q.add(5)
-    q.add(6)
+    q.insert(4)
+    q.insert(5)
+    q.insert(6)
     expect(q.size()).toBe(4)
     q.reset()
     expect(q.size()).toBe(0)
@@ -81,7 +81,7 @@ describe('toArray', () => {
   })
 
   it('should return only remaining items', () => {
-    q.add(4)
+    q.insert(4)
     q.remove()
     q.remove()
     q.remove()

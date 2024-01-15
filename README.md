@@ -3,7 +3,7 @@
 A simple, tiny and performant [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)).
 
 - Simple API
-- 366 bytes minified (202 bytes gzipped)
+- 369 bytes minified (202 bytes gzipped)
 - TypeScript declarations
 - No dependencies
 - Public domain
@@ -46,13 +46,13 @@ Optionally, specify items up front:
 const queue = new Q([1, 2, 3])
 ```
 
-#### Add item to back of queue (enqueue)
+#### Add an item to back of queue (enqueue/push)
 
 ```js
-queue.add(4)
+queue.insert(4)
 ```
 
-#### Remove item from front of queue (dequeue)
+#### Remove item from front of queue (dequeue/shift)
 
 ```js
 queue.remove() // 1
