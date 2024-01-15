@@ -3,7 +3,7 @@
 A simple, tiny and performant [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)).
 
 - Simple API
-- 379 bytes minified (203 bytes gzipped)
+- 366 bytes minified (202 bytes gzipped)
 - TypeScript declarations
 - No dependencies
 - Public domain

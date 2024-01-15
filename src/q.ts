@@ -1,43 +1,44 @@
 export class Q<T = unknown> {
-  private items: Array<T | undefined>
-  private front: number
-  private back: number
+  private list: Array<T | undefined>
+  private head: number
+  private tail: number
 
-  constructor(items?: Array<T>) {
-    this.reset(items)
+  /** Creates a new queue, optionally with a specified array of items. */
+  constructor(list?: Array<T>) {
+    this.reset(list)
   }
 
-  /** Adds one item to the back of the queue (enqueue). */
+  /** Adds one item to the tail of the queue (enqueue). */
   add(item: T) {
-    this.items[this.back++] = item
+    this.list[this.tail++] = item
   }
 
-  /** Removes one item from the front of the queue (dequeue). */
+  /** Removes one item from the head of the queue (dequeue). */
   remove() {
-    const item = this.items[this.front]
-    this.items[this.front++] = undefined
+    const item = this.list[this.head]
+    this.list[this.head++] = undefined
     return item
   }
 
   /** Returns the item at the specified index without removing it. */
   peek(index: number) {
-    return this.items[(index < 0 ? this.back : this.front) + index]
+    return this.list[(index < 0 ? this.tail : this.head) + index]
   }
 
   /** Number of items in the queue. */
   size() {
-    return this.back === this.front ? 0 : this.back - this.front
+    return this.tail === this.head ? 0 : this.tail - this.head
   }
 
   /** Returns an array of all items in the queue. */
   toArray() {
-    return this.items.slice(this.front)
+    return this.list.slice(this.head)
   }
 
   /** Resets the queue, optionally to a specified array of items. */
   reset(items: Array<T> = []) {
-    this.items = items
-    this.front = 0
-    this.back = items.length
+    this.list = items
+    this.head = 0
+    this.tail = items.length
   }
 }
