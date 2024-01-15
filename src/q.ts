@@ -4,8 +4,8 @@ export class Q<T = unknown> {
   private tail: number
 
   /** Creates a new queue, optionally with a specified array of items. */
-  constructor(list?: Array<T>) {
-    this.reset(list)
+  constructor(items?: Array<T>) {
+    this.reset(items)
   }
 
   /** Adds an item to the tail of the queue (enqueue). */
