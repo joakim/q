@@ -8,12 +8,12 @@ export class Q<T = unknown> {
     this.reset(items)
   }
 
-  /** Adds an item to the tail of the queue (enqueue). */
+  /** Adds an item to the tail of the queue (enqueue/push). */
   insert(item: T) {
     this.list[this.tail++] = item
   }
 
-  /** Removes one item from the head of the queue (dequeue). */
+  /** Removes one item from the head of the queue (dequeue/shift). */
   remove() {
     const item = this.list[this.head]
     this.list[this.head++] = undefined
