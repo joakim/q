@@ -1,6 +1,6 @@
 # Q
 
-![Size](https://img.shields.io/badge/size-398_B-blue)
+![Size](https://img.shields.io/badge/size-342_B-blue)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-green)
 ![License](https://img.shields.io/badge/license-public_domain-green)
 ![Maintenance](https://img.shields.io/badge/maintained-yes-green)
@@ -8,7 +8,7 @@
 A tiny and simple [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and_electronics)) [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) with [decent](#performance) performance.
 
 - Simple interface
-- 398 bytes minified (214 bytes gzipped)
+- 342 bytes minified (204 bytes gzipped)
 - Documentation and TypeScript declarations
 - Tests and benchmarks
 - No dependencies
@@ -49,7 +49,7 @@ const { Q } = require('@joakimstai/q')
 const queue = new Q()
 ```
 
-Optionally, specify items up front:
+Optionally, specify an array of items up front:
 
 ```js
 const queue = new Q([1, 2, 3])
@@ -99,7 +99,7 @@ queue.toArray() // [2, 3, 4]
 queue.reset()
 ```
 
-Optionally, specify items to reset to:
+Optionally, specify an array of items to reset to:
 
 ```js
 queue.reset([1, 2, 3])
@@ -110,11 +110,11 @@ That's it.
 
 ## Performance
 
-`Q` is about twice as fast as using `Array` as a makeshift queue. It can't match the highly optimized [`denque`](https://github.com/invertase/denque/) and [`fast-fifo`](https://github.com/mafintosh/fast-fifo), but when size is a priority, it should be more than performant enough for most use cases. Not bad for ~200 bytes gzipped.
+Below are the results of benchmarks adapted from [`denque`](https://github.com/invertase/denque/) and [`fast-fifo`](https://github.com/mafintosh/fast-fifo). They were executed on JavaScriptCore with [`bun run`](https://bun.sh/docs/cli/run), using [`tinybench`](https://github.com/tinylibs/tinybench/), on a 2018 Mac Mini (3 GHz 6-Core Intel Core i5).
 
-Below are results of benchmarks adapted from those of [`denque`](https://github.com/invertase/denque/) and [`fast-fifo`](https://github.com/mafintosh/fast-fifo), executed on JavaScriptCore with [`tinybench`](https://github.com/tinylibs/tinybench/) and [`bun run`](https://bun.sh/docs/cli/run).
+According to these benchmarks, `Q` is about 2 × faster than using `Array` as a makeshift queue. It's not able to match the highly optimized [`denque`](https://github.com/invertase/denque/) and [`fast-fifo`](https://github.com/mafintosh/fast-fifo) libraries, but is an alternative when size is important, and it should be more than performant enough for most use cases. Pretty decent for 342 bytes.
 
-Benchmarking is not my expertise, so I can't give an explanation or analysis of the results. Take it for what it is. YMMV, grain of salt and all that.
+The high margin of error on the results of `Q` is notable, though the results are relatively stable across runs. Benchmarking is not my strong suit, so I can't really offer an explanation or analysis. Take it for what it is. YMMV, grain of salt and all that.
 
 #### [bench/fifo.ts](bench/fifo.ts)
 
@@ -122,14 +122,14 @@ Benchmarking is not my expertise, so I can't give an explanation or analysis of 
 ┌───┬───────────────────┬─────────┬────────────────────┬─────────┬─────────┐
 │   │ Task Name         │ ops/sec │ Average Time (ns)  │ Margin  │ Samples │
 ├───┼───────────────────┼─────────┼────────────────────┼─────────┼─────────┤
-│ 0 │ bulk:denque       │ 53,872  │ 18562.28950999995  │ ±0.08%  │ 100000  │
-│ 1 │ bulk:fifo         │ 52,032  │ 19218.634540000847 │ ±0.09%  │ 100000  │
-│ 2 │ bulk:q            │ 35,813  │ 27922.10162999754  │ ±58.10% │ 100000  │
-│ 3 │ bulk:array        │ 16,020  │ 62418.668570000336 │ ±0.24%  │ 100000  │
-│ 4 │ individual:denque │ 56,777  │ 17612.619739996448 │ ±0.09%  │ 100000  │
-│ 5 │ individual:fifo   │ 53,141  │ 18817.852309992722 │ ±0.10%  │ 100000  │
-│ 6 │ individual:q      │ 30,699  │ 32574.258620005203 │ ±95.94% │ 100000  │
-│ 7 │ individual:array  │ 19,597  │ 51027.722609998156 │ ±0.52%  │ 100000  │
+│ 0 │ bulk:denque       │ 56,922  │ 17567.660880000152 │ ±0.07%  │ 100000  │
+│ 1 │ bulk:fifo         │ 53,502  │ 18690.82211000017  │ ±0.07%  │ 100000  │
+│ 2 │ bulk:q            │ 34,965  │ 28599.61588000114  │ ±57.44% │ 100000  │
+│ 3 │ bulk:array        │ 16,025  │ 62401.65270999802  │ ±0.24%  │ 100000  │
+│ 4 │ individual:denque │ 57,640  │ 17348.849719997284 │ ±0.10%  │ 100000  │
+│ 5 │ individual:fifo   │ 53,131  │ 18821.2484400024   │ ±0.08%  │ 100000  │
+│ 6 │ individual:q      │ 30,898  │ 32364.489050003427 │ ±94.29% │ 100000  │
+│ 7 │ individual:array  │ 20,632  │ 48467.935640011136 │ ±0.30%  │ 100000  │
 └───┴───────────────────┴─────────┴────────────────────┴─────────┴─────────┘
 ```
 
@@ -139,9 +139,9 @@ Benchmarking is not my expertise, so I can't give an explanation or analysis of 
 ┌───┬───────────┬────────────┬────────────────────┬─────────┬─────────┐
 │   │ Task Name │ ops/sec    │ Average Time (ns)  │ Margin  │ Samples │
 ├───┼───────────┼────────────┼────────────────────┼─────────┼─────────┤
-│ 0 │ denque    │ 11,716,219 │ 85.35176464763387  │ ±0.16%  │ 5858110 │
-│ 1 │ fifo      │ 10,629,709 │ 94.07594976726048  │ ±0.20%  │ 5314855 │
-│ 2 │ q         │ 9,411,504  │ 106.25293486521234 │ ±37.35% │ 4705753 │
-│ 3 │ array     │ 4,353,245  │ 229.71365367312185 │ ±7.13%  │ 2176623 │
+│ 0 │ denque    │ 11,782,944 │ 84.86842916873053  │ ±0.09%  │ 5891473 │
+│ 1 │ fifo      │ 10,811,026 │ 92.49815410713445  │ ±0.12%  │ 5405514 │
+│ 2 │ q         │ 9,667,354  │ 103.44091228259218 │ ±35.83% │ 4833678 │
+│ 3 │ array     │ 4,366,517  │ 229.01543930422363 │ ±5.63%  │ 2183259 │
 └───┴───────────┴────────────┴────────────────────┴─────────┴─────────┘
 ```
