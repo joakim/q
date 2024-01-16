@@ -8,24 +8,24 @@ export class Q<T = unknown> {
     this.reset(items)
   }
 
-  /** Adds an item to the tail of the queue (enqueue/push). */
-  insert(item: T) {
+  /** Adds an item to the tail of the queue (enqueue). */
+  push(item: T) {
     this.list[this.tail++] = item
   }
 
-  /** Removes one item from the head of the queue (dequeue/shift). */
-  remove() {
+  /** Removes one item from the head of the queue (dequeue). */
+  shift() {
     const item = this.list[this.head]
     this.list[this.head++] = undefined
     return item
   }
 
-  /** Returns the item at the specified index without removing it. */
-  peek(index: number) {
+  /** Returns the item at the specified index without removing it (peek). */
+  at(index: number) {
     return this.list[(index < 0 ? this.tail : this.head) + index]
   }
 
-  /** Number of items in the queue. */
+  /** Number of items currently held in the queue. */
   size() {
     return this.tail === this.head ? 0 : this.tail - this.head
   }

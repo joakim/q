@@ -13,46 +13,46 @@ describe('constructor', () => {
   })
 })
 
-describe('add', () => {
+describe('push', () => {
   const q = new Q([1, 2, 3])
 
   it('should add an item to the back of the queue', () => {
-    q.insert(4)
+    q.push(4)
     expect(q.toArray()).toEqual([1, 2, 3, 4])
   })
 
   it('should accept no argument (undefined)', () => {
     // @ts-ignore
-    q.insert()
+    q.push()
     expect(q.toArray()).toEqual([1, 2, 3, 4, undefined])
   })
 })
 
-describe('remove', () => {
+describe('shift', () => {
   const q = new Q([1, 2, 3])
 
-  it('should remove an item from the front of the queue', () => {
-    const item = q.remove()
+  it('should remove one item from the front of the queue', () => {
+    const item = q.shift()
     expect(item).toBe(1)
     expect(q.toArray()).toEqual([2, 3])
   })
 })
 
-describe('peek', () => {
+describe('at', () => {
   const q = new Q([1, 2, 3])
 
   it('should return correct items', () => {
-    expect(q.peek(0)).toBe(1)
-    expect(q.peek(1)).toBe(2)
-    expect(q.peek(2)).toBe(3)
-    expect(q.peek(-1)).toBe(3)
-    expect(q.peek(-2)).toBe(2)
-    expect(q.peek(-3)).toBe(1)
+    expect(q.at(0)).toBe(1)
+    expect(q.at(1)).toBe(2)
+    expect(q.at(2)).toBe(3)
+    expect(q.at(-1)).toBe(3)
+    expect(q.at(-2)).toBe(2)
+    expect(q.at(-3)).toBe(1)
   })
 
   it('should return undefined for index out of bounds', () => {
-    expect(q.peek(4)).toBe(undefined)
-    expect(q.peek(-5)).toBe(undefined)
+    expect(q.at(4)).toBe(undefined)
+    expect(q.at(-5)).toBe(undefined)
   })
 })
 
@@ -61,12 +61,12 @@ describe('size', () => {
 
   it('should return the correct size of the queue', () => {
     expect(q.size()).toBe(3)
-    q.remove()
-    q.remove()
+    q.shift()
+    q.shift()
     expect(q.size()).toBe(1)
-    q.insert(4)
-    q.insert(5)
-    q.insert(6)
+    q.push(4)
+    q.push(5)
+    q.push(6)
     expect(q.size()).toBe(4)
     q.reset()
     expect(q.size()).toBe(0)
@@ -81,10 +81,10 @@ describe('toArray', () => {
   })
 
   it('should return only remaining items', () => {
-    q.insert(4)
-    q.remove()
-    q.remove()
-    q.remove()
+    q.push(4)
+    q.shift()
+    q.shift()
+    q.shift()
     expect(q.toArray()).toEqual([4])
   })
 })
