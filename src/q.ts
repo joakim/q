@@ -27,7 +27,12 @@ export class Q<T = unknown> {
 
   /** Number of items currently held in the queue. */
   size() {
-    return this.tail === this.head ? 0 : this.tail - this.head
+    return this.hasItems() ? this.tail - this.head : 0
+  }
+
+  /** Whether the queue has any items. */
+  hasItems() {
+    return this.tail !== this.head
   }
 
   /** Returns an array of all items in the queue. */

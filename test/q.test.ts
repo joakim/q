@@ -73,6 +73,15 @@ describe('size', () => {
   })
 })
 
+describe('hasItems', () => {
+  it('should return whether the queue has any items', () => {
+    const q = new Q([1, 2, 3])
+    expect(q.hasItems()).toBe(true)
+    q.reset()
+    expect(q.hasItems()).toBe(false)
+  })
+})
+
 describe('toArray', () => {
   const q = new Q([1, 2, 3])
 
