@@ -3,7 +3,7 @@
 import { Bench } from 'tinybench'
 import Denque from 'denque'
 import FIFO from 'fast-fifo'
-import { Q } from '../src/q.ts'
+import { Q } from '../dist/q-min'
 
 const denque = new Denque()
 const fifo = new FIFO()

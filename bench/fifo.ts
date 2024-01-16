@@ -3,14 +3,14 @@
 import { Bench } from 'tinybench'
 import Denque from 'denque'
 import FIFO from 'fast-fifo'
-import { Q } from '../src/q.ts'
+import { Q } from '../dist/q-min'
 
 const denque = new Denque()
 const fifo = new FIFO()
 const q = new Q()
 const array = new Array()
 
-const bench = new Bench({ iterations: 1e5 })
+const bench = new Bench({ iterations: 100_000 })
 
 const runs = 1024
 
