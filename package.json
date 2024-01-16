@@ -1,18 +1,11 @@
 {
   "name": "@joakimstai/q",
   "version": "0.1.0",
-  "description": "A simple, tiny and performant FIFO queue.",
-  "author": "Joakim Stai",
-  "license": "MIT",
+  "description": "A tiny and simple FIFO queue with decent performance.",
+  "license": "Unlicense",
   "keywords": [
     "queue",
     "fifo"
-  ],
-  "type": "module",
-  "main": "dist/q.js",
-  "types": "dist/q.d.ts",
-  "files": [
-    "/dist"
   ],
   "homepage": "https://github.com/joakim/q#readme",
   "bugs": "https://github.com/joakim/q/issues",
@@ -20,6 +13,15 @@
     "type": "git",
     "url": "https://github.com/joakim/q.git"
   },
+  "contributors": [
+    "Joakim Stai"
+  ],
+  "type": "module",
+  "main": "dist/q.js",
+  "types": "dist/q.d.ts",
+  "files": [
+    "/dist"
+  ],
   "engines": {
     "pnpm": "^8.0.0"
   },
