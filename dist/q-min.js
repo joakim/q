@@ -1,0 +1,1 @@
+export class Q{constructor(a){this.reset(a)}push(i){this.l[this.t++]=i}shift(){const i=this.l[this.h];return this.l[this.h++]=void 0,i}at(n){return this.l[(n<0?this.t:this.h)+n]}size(){return this.t==this.h?0:this.t-this.h}hasItems(){return this.t!=this.h}toArray(){return this.l.slice(this.h)}reset(a=[]){this.l=a,this.h=0,this.t=a.length}}
