@@ -110,7 +110,7 @@ That's it.
 
 ## Performance
 
-`Q` is about twice as fast as using `Array` as a makeshift queue. It can't match the highly optimized [`denque`](https://github.com/invertase/denque/) and [`fast-fifo`](https://github.com/mafintosh/fast-fifo), but if size is a priority, it should be more than performant enough for most use cases. Not bad for ~200 bytes gzipped.
+`Q` is about twice as fast as using `Array` as a makeshift queue. It can't match the highly optimized [`denque`](https://github.com/invertase/denque/) and [`fast-fifo`](https://github.com/mafintosh/fast-fifo), but when size is a priority, it should be more than performant enough for most use cases. Not bad for ~200 bytes gzipped.
 
 Below are results of benchmarks adapted from those of [`denque`](https://github.com/invertase/denque/) and [`fast-fifo`](https://github.com/mafintosh/fast-fifo), executed on JavaScriptCore with [`tinybench`](https://github.com/tinylibs/tinybench/) and [`bun run`](https://bun.sh/docs/cli/run).
 
