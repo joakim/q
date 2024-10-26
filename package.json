@@ -19,6 +19,8 @@
   "type": "module",
   "main": "dist/q.js",
   "types": "dist/q.d.ts",
+  "exports": "./dist/q.js",
+  "sideEffects": false,
   "files": [
     "/dist"
   ],
