@@ -113,9 +113,11 @@ That's it.
 
 Below are the results of benchmarks adapted from [`denque`](https://github.com/invertase/denque/), [`fast-fifo`](https://github.com/mafintosh/fast-fifo) and [`data-structure-typed`](https://github.com/zrwusa/data-structure-typed/blob/main/test/performance/data-structures/queue/queue.test.ts). They were executed on JavaScriptCore with [`bun`](https://bun.sh/) using [`tinybench`](https://github.com/tinylibs/tinybench/) on a 2018 Mac Mini (3 GHz 6-Core Intel Core i5).
 
-According to these benchmarks, `Q` is up there with the highly optimized [`denque`](https://github.com/invertase/denque/) and [`fast-fifo`](https://github.com/mafintosh/fast-fifo) libraries, and much faster than using `Array` as a makeshift queue. Not bad for 252 bytes (minzipped)!
+According to these benchmarks, `Q` is up there with the highly optimized [`denque`](https://github.com/invertase/denque/) and [`fast-fifo`](https://github.com/mafintosh/fast-fifo) libraries, and much faster than using `Array` as a makeshift queue. Not bad for 252 bytes!
 
 I admit to not knowing much about the dark arts of benchmarking, so I can't vouch for the accuracy of these results or offer an analysis. Take it for what it is. YMMV, grain of salt and all that.
+
+The results have been sorted by ops/sec descending.
 
 ```
 $ bun run ./bench growth
@@ -130,15 +132,15 @@ $ bun run ./bench growth
 └───┴──────────┴─────────┴───────────────────┴────────┴─────────┘
 
 $ bun run ./bench push
-[2.59s] [object Object] (size: 1,000, iterations: 1,000)
-┌───┬──────────┬─────────┬───────────────────┬──────────┬─────────┐
-│   │ Library  │ ops/sec │ Average Time (ns) │ Margin   │ Samples │
-├───┼──────────┼─────────┼───────────────────┼──────────┼─────────┤
-│ 0 │ Denque   │ 31,137  │ 32,115            │ ±116.17% │ 15,569  │
-│ 1 │ FastFIFO │ 51,459  │ 19,432            │ ±54.75%  │ 26,608  │
-│ 2 │ Q        │ 53,017  │ 18,861            │ ±88.73%  │ 26,509  │
-│ 3 │ Array    │ 35,761  │ 27,963            │ ±105.16% │ 17,881  │
-└───┴──────────┴─────────┴───────────────────┴──────────┴─────────┘
+[2.53s] [object Object] (size: 1,000, iterations: 1,000)
+┌───┬──────────┬─────────┬───────────────────┬─────────┬─────────┐
+│   │ Library  │ ops/sec │ Average Time (ns) │ Margin  │ Samples │
+├───┼──────────┼─────────┼───────────────────┼─────────┼─────────┤
+│ 2 │ Q        │ 60,003  │ 16,665            │ ±77.57% │ 30,002  │
+│ 1 │ FastFIFO │ 54,737  │ 18,268            │ ±53.60% │ 27,369  │
+│ 3 │ Array    │ 45,655  │ 21,903            │ ±83.20% │ 22,828  │
+│ 0 │ Denque   │ 40,067  │ 24,957            │ ±99.66% │ 20,034  │
+└───┴──────────┴─────────┴───────────────────┴─────────┴─────────┘
 
 $ bun run ./bench push-shift
 [2.44s] [object Object] (size: 1,000, iterations: 1,000)
@@ -157,8 +159,8 @@ $ bun run ./bench shift-push
 │   │ Library  │ ops/sec    │ Average Time (ns) │ Margin │ Samples   │
 ├───┼──────────┼────────────┼───────────────────┼────────┼───────────┤
 │ 0 │ Denque   │ 11,487,654 │ 87                │ ±0.28% │ 5,743,828 │
-│ 1 │ FastFIFO │ 10,000,355 │ 99                │ ±0.85% │ 5,000,178 │
 │ 2 │ Q        │ 10,553,278 │ 94                │ ±0.72% │ 5,276,640 │
+│ 1 │ FastFIFO │ 10,000,355 │ 99                │ ±0.85% │ 5,000,178 │
 │ 3 │ Array    │ 5,928,301  │ 168               │ ±0.26% │ 2,964,151 │
 └───┴──────────┴────────────┴───────────────────┴────────┴───────────┘
 ```
