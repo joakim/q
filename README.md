@@ -1,7 +1,6 @@
 # Q
 
-![npm minified](https://img.shields.io/bundlephobia/min/@joakimstai/q)
-![npm minzipped](https://img.shields.io/bundlephobia/minzip/@joakimstai/q)
+![Size](https://img.shields.io/bundlejs/size/%40joakimstai/q)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-green)
 ![License](https://img.shields.io/badge/license-public_domain-green)
 ![Maintenance](https://img.shields.io/badge/maintained-yes-green)
@@ -10,7 +9,7 @@ A tiny, simple and fast [FIFO](https://en.wikipedia.org/wiki/FIFO_(computing_and
 
 - Simple interface
 - Up there with the fastest queue libraries
-- 432 bytes minified (half that gzipped)
+- 252 bytes minzipped
 - TypeScript declarations
 - Tests and benchmarks
 - No dependencies
@@ -114,7 +113,7 @@ That's it.
 
 Below are the results of benchmarks adapted from [`denque`](https://github.com/invertase/denque/), [`fast-fifo`](https://github.com/mafintosh/fast-fifo) and [`data-structure-typed`](https://github.com/zrwusa/data-structure-typed/blob/main/test/performance/data-structures/queue/queue.test.ts). They were executed on JavaScriptCore with [`bun`](https://bun.sh/) using [`tinybench`](https://github.com/tinylibs/tinybench/) on a 2018 Mac Mini (3 GHz 6-Core Intel Core i5).
 
-According to these benchmarks, `Q` is up there with the highly optimized [`denque`](https://github.com/invertase/denque/) and [`fast-fifo`](https://github.com/mafintosh/fast-fifo) libraries, and much faster than using `Array` as a makeshift queue. Pretty decent for 432 bytes!
+According to these benchmarks, `Q` is up there with the highly optimized [`denque`](https://github.com/invertase/denque/) and [`fast-fifo`](https://github.com/mafintosh/fast-fifo) libraries, and much faster than using `Array` as a makeshift queue. Not bad for 252 bytes (minzipped)!
 
 I admit to not knowing much about the dark arts of benchmarking, so I can't vouch for the accuracy of these results or offer an analysis. Take it for what it is. YMMV, grain of salt and all that.
 
@@ -124,7 +123,7 @@ $ bun run ./bench growth
 ┌───┬──────────┬─────────┬───────────────────┬────────┬─────────┐
 │   │ Library  │ ops/sec │ Average Time (ns) │ Margin │ Samples │
 ├───┼──────────┼─────────┼───────────────────┼────────┼─────────┤
-│ 0 │ Denque   │ 2,503   │ 399,424           │ ±0.92% │ 1,252   │ <- Denque fastest
+│ 0 │ Denque   │ 2,503   │ 399,424           │ ±0.92% │ 1,252   │
 │ 1 │ FastFIFO │ 2,406   │ 415,525           │ ±2.45% │ 1,204   │
 │ 2 │ Q        │ 2,204   │ 453,532           │ ±1.75% │ 1,103   │
 │ 3 │ Array    │ 769     │ 1,299,899         │ ±2.52% │ 385     │
@@ -137,7 +136,7 @@ $ bun run ./bench push
 ├───┼──────────┼─────────┼───────────────────┼──────────┼─────────┤
 │ 0 │ Denque   │ 31,137  │ 32,115            │ ±116.17% │ 15,569  │
 │ 1 │ FastFIFO │ 51,459  │ 19,432            │ ±54.75%  │ 26,608  │
-│ 2 │ Q        │ 53,017  │ 18,861            │ ±88.73%  │ 26,509  │ <- Q fastest
+│ 2 │ Q        │ 53,017  │ 18,861            │ ±88.73%  │ 26,509  │
 │ 3 │ Array    │ 35,761  │ 27,963            │ ±105.16% │ 17,881  │
 └───┴──────────┴─────────┴───────────────────┴──────────┴─────────┘
 
@@ -146,7 +145,7 @@ $ bun run ./bench push-shift
 ┌───┬──────────┬─────────┬───────────────────┬────────┬─────────┐
 │   │ Library  │ ops/sec │ Average Time (ns) │ Margin │ Samples │
 ├───┼──────────┼─────────┼───────────────────┼────────┼─────────┤
-│ 0 │ Denque   │ 61,955  │ 16,140            │ ±0.35% │ 30,978  │ <- Denque fastest
+│ 0 │ Denque   │ 61,955  │ 16,140            │ ±0.35% │ 30,978  │
 │ 1 │ FastFIFO │ 48,961  │ 20,424            │ ±0.40% │ 24,481  │
 │ 2 │ Q        │ 41,098  │ 24,331            │ ±1.19% │ 20,550  │
 │ 3 │ Array    │ 14,648  │ 68,266            │ ±2.15% │ 7,325   │
@@ -157,7 +156,7 @@ $ bun run ./bench shift-push
 ┌───┬──────────┬────────────┬───────────────────┬────────┬───────────┐
 │   │ Library  │ ops/sec    │ Average Time (ns) │ Margin │ Samples   │
 ├───┼──────────┼────────────┼───────────────────┼────────┼───────────┤
-│ 0 │ Denque   │ 11,487,654 │ 87                │ ±0.28% │ 5,743,828 │ <- Denque fastest
+│ 0 │ Denque   │ 11,487,654 │ 87                │ ±0.28% │ 5,743,828 │
 │ 1 │ FastFIFO │ 10,000,355 │ 99                │ ±0.85% │ 5,000,178 │
 │ 2 │ Q        │ 10,553,278 │ 94                │ ±0.72% │ 5,276,640 │
 │ 3 │ Array    │ 5,928,301  │ 168               │ ±0.26% │ 2,964,151 │
