@@ -1,49 +1,63 @@
 export class Q<T = unknown> {
-  private list: Array<T | undefined>
-  private head: number
-  private tail: number
+  /** Internal **a**rray of queued items. */
+  private a: T[]
+
+  /** Internal **h**ead of the queue (as an offset on the internal array). */
+  private h: number
 
   /** Creates a new queue, optionally with a specified array of items. */
-  constructor(items?: Array<T>) {
+  constructor(items?: T[]) {
     this.reset(items)
   }
 
-  /** Adds an item to the tail of the queue (enqueue). */
+  /** Adds one item to the back/tail of the queue (enqueue). */
   push(item: T) {
-    this.list[this.tail++] = item
+    this.a.push(item)
   }
 
-  /** Removes one item from the head of the queue (dequeue). */
+  /** Removes one item from the front/head of the queue (dequeue). */
   shift() {
-    const item = this.list[this.head]
-    this.list[this.head++] = undefined
-    return item
+    var item = this.a[this.h]
+    this.a[this.h++] = undefined
+
+    // Above some threshold, if half the array has been shifted, remove the empty portion
+    if (this.h > 1000 && 2 * this.h > this.a.length) {
+      this.a = this.a.slice(this.h)
+      this.h = 0
+    }
+
+    return item as number | undefined
   }
 
   /** Returns the item at the specified index without removing it (peek). */
   at(index: number) {
-    return this.list[(index < 0 ? this.tail : this.head) + index]
+    // Prevents out-of-bounds index lookups, which could reduce performance from then on (V8).
+    // To validate both positive and negative indices, it converts any negative indices to
+    // positive minus 1 when checking, so that index > length (-3 becomes 2).
+    if ((index < 0 ? -index - 1 : index) > this.a.length) return
+
+    // Positive indices are added to head, negative indices subtracted from tail (this.a.length).
+    return this.a[(index < 0 ? this.a.length : this.h) + index]
   }
 
   /** Number of items currently held in the queue. */
   size() {
-    return this.tail == this.head ? 0 : this.tail - this.head
+    return this.a.length - this.h
   }
 
-  /** Whether the queue has any items. */
+  /** Whether the queue has any items. Useful in `while` loops. */
   hasItems() {
-    return this.tail != this.head
+    return this.h != this.a.length
   }
 
   /** Returns an array of all items in the queue. */
   toArray() {
-    return this.list.slice(this.head)
+    return this.a.slice(this.h)
   }
 
   /** Resets the queue, optionally to a specified array of items. */
-  reset(items: Array<T> = []) {
-    this.list = items
-    this.head = 0
-    this.tail = items.length
+  reset(items: T[] = []) {
+    this.a = items
+    this.h = 0
   }
 }

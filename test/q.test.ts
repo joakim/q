@@ -1,20 +1,20 @@
 import { describe, it, expect } from 'vitest'
-import { Q } from '../dist/q-min'
+import { Q } from '../src/q'
 
 describe('constructor', () => {
   it('should default to an empty queue', () => {
-    const queue = new Q()
+    const queue = new Q<number>()
     expect(queue.toArray()).toEqual([])
   })
 
   it('should allow setting of items', () => {
-    const queue = new Q([1, 2, 3])
+    const queue = new Q<number>([1, 2, 3])
     expect(queue.toArray()).toEqual([1, 2, 3])
   })
 })
 
 describe('push', () => {
-  const queue = new Q([1, 2, 3])
+  const queue = new Q<number>([1, 2, 3])
 
   it('should add an item to the back of the queue', () => {
     queue.push(4)
@@ -29,17 +29,21 @@ describe('push', () => {
 })
 
 describe('shift', () => {
-  const queue = new Q([1, 2, 3])
-
   it('should remove one item from the front of the queue', () => {
+    const queue = new Q<number>([1, 2, 3])
     const item = queue.shift()
     expect(item).toBe(1)
     expect(queue.toArray()).toEqual([2, 3])
   })
+
+  it('should return undefined when the queue is empty', () => {
+    const queue = new Q<number>()
+    expect(queue.shift()).toBeUndefined()
+  })
 })
 
 describe('at', () => {
-  const queue = new Q([1, 2, 3])
+  const queue = new Q<number>([1, 2, 3])
 
   it('should return correct items', () => {
     expect(queue.at(0)).toBe(1)
@@ -51,8 +55,8 @@ describe('at', () => {
   })
 
   it('should return undefined for index out of bounds', () => {
-    expect(queue.at(4)).toBe(undefined)
-    expect(queue.at(-5)).toBe(undefined)
+    expect(queue.at(3)).toBe(undefined)
+    expect(queue.at(-4)).toBe(undefined)
   })
 
   it('should return undefined for missing argument', () => {
@@ -62,7 +66,7 @@ describe('at', () => {
 })
 
 describe('size', () => {
-  const queue = new Q([1, 2, 3])
+  const queue = new Q<number>([1, 2, 3])
 
   it('should return the correct size of the queue', () => {
     expect(queue.size()).toBe(3)
@@ -80,7 +84,7 @@ describe('size', () => {
 
 describe('hasItems', () => {
   it('should return whether the queue has any items', () => {
-    const queue = new Q([1, 2, 3])
+    const queue = new Q<number>([1, 2, 3])
     expect(queue.hasItems()).toBe(true)
     queue.reset()
     expect(queue.hasItems()).toBe(false)
@@ -88,7 +92,7 @@ describe('hasItems', () => {
 })
 
 describe('toArray', () => {
-  const queue = new Q([1, 2, 3])
+  const queue = new Q<number>([1, 2, 3])
 
   it('should return an array', () => {
     expect(queue.toArray()).toEqual([1, 2, 3])
@@ -104,7 +108,7 @@ describe('toArray', () => {
 })
 
 describe('reset', () => {
-  const queue = new Q([1, 2, 3])
+  const queue = new Q<number>([1, 2, 3])
 
   it('should clear the queue', () => {
     queue.reset()

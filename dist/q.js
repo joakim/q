@@ -3,36 +3,41 @@ export class Q {
   constructor(items) {
     this.reset(items);
   }
-  /** Adds an item to the tail of the queue (enqueue). */
+  /** Adds one item to the back/tail of the queue (enqueue). */
   push(item) {
-    this.list[this.tail++] = item;
+    this.a.push(item);
   }
-  /** Removes one item from the head of the queue (dequeue). */
+  /** Removes one item from the front/head of the queue (dequeue). */
   shift() {
-    const item = this.list[this.head];
-    this.list[this.head++] = void 0;
+    var item = this.a[this.h];
+    this.a[this.h++] = void 0;
+    if (this.h > 1e3 && 2 * this.h > this.a.length) {
+      this.a = this.a.slice(this.h);
+      this.h = 0;
+    }
     return item;
   }
   /** Returns the item at the specified index without removing it (peek). */
   at(index) {
-    return this.list[(index < 0 ? this.tail : this.head) + index];
+    if ((index < 0 ? -index - 1 : index) > this.a.length)
+      return;
+    return this.a[(index < 0 ? this.a.length : this.h) + index];
   }
   /** Number of items currently held in the queue. */
   size() {
-    return this.tail == this.head ? 0 : this.tail - this.head;
+    return this.a.length - this.h;
   }
-  /** Whether the queue has any items. */
+  /** Whether the queue has any items. Useful in `while` loops. */
   hasItems() {
-    return this.tail != this.head;
+    return this.h != this.a.length;
   }
   /** Returns an array of all items in the queue. */
   toArray() {
-    return this.list.slice(this.head);
+    return this.a.slice(this.h);
   }
   /** Resets the queue, optionally to a specified array of items. */
   reset(items = []) {
-    this.list = items;
-    this.head = 0;
-    this.tail = items.length;
+    this.a = items;
+    this.h = 0;
   }
 }
